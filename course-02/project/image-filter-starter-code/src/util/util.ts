@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { promises } from 'fs';
 import Jimp = require('jimp');
 
 // filterImageFromURL
@@ -13,11 +13,13 @@ export async function filterImageFromURL(inputURL: string): Promise<string>{
         const photo = await Jimp.read(inputURL);
         const outpath = '/tmp/filtered.'+Math.floor(Math.random() * 2000)+'.jpg';
         await photo
+        
         .resize(256, 256) // resize
         .quality(60) // set JPEG quality
         .greyscale() // set greyscale
         .write(__dirname+outpath, (img)=>{
             resolve(__dirname+outpath);
+            
         });
     });
 }
@@ -32,3 +34,24 @@ export async function deleteLocalFiles(files:Array<string>){
         fs.unlinkSync(file);
     }
 }
+
+
+
+export function walk(dir:string) {
+    var results:Array<string> = [];
+    var list = fs.readdirSync(dir);
+    list.forEach(function(file) {
+        file = dir + '/' + file;
+        var stat = fs.statSync(file);
+        if (stat && stat.isDirectory()) { 
+            /* Recurse into a subdirectory */
+            results = results.concat(walk(file));
+        } else { 
+            /* Is a file */
+            results.push(file);
+            
+        }
+    });
+    return results;
+}
+
