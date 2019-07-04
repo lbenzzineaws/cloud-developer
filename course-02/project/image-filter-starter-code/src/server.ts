@@ -39,7 +39,7 @@ import {filterImageFromURL, deleteLocalFiles, walk} from './util/util';
     filteredpath.then(function(result){
     let path:string = '';
     res.on('finish', function () {
-    path = result.substring(0,87);
+    path = result.substring(0,89);
     let temp = walk(path);
     deleteLocalFiles(temp);
     });

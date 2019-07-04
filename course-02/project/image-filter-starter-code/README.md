@@ -2,6 +2,12 @@
 
 ## Tasks
 
+#########################################################
+# for the AWS beanstalk url Please use:
+# http://udacityproject2-env.xan5sqgbgi.us-west-2.elasticbeanstalk.com/
+#
+##########################################################
+
 ### Setup Node Enviornment
 
 You'll need to create a new node server. Open a new terminal within the project directory and run:
