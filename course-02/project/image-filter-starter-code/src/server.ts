@@ -1,6 +1,6 @@
 import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles, walk} from './util/util';
+import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
 
@@ -39,9 +39,9 @@ import {filterImageFromURL, deleteLocalFiles, walk} from './util/util';
     filteredpath.then(function(result){
     let path:string = '';
     res.on('finish', function () {
-    path = result.substring(0,89);
-    let temp = walk(path);
-    deleteLocalFiles(temp);
+    path = result.substring(0,87);
+    
+    deleteLocalFiles([result]);
     });
     return res.sendFile(result);
     });
